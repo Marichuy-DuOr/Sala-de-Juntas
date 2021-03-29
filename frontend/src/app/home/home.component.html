@@ -1,0 +1,55 @@
+<div class="container filtrar">
+
+    <!-- Salas disponibles -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <p class="h3 titulo">Salas Disponibles</p>
+                    <hr class="separator" />
+                </div>
+            </div>
+            <div class="contenedor col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3" *ngFor="let sala of salasDisponibles">
+                <figure>
+                    <img src={{sala.imagen}} alt="">
+                    <div class="capa">
+                        <h1 class="titulo-salas">
+                            {{sala.nombre}}
+                        </h1>
+                        <button type="button" class="btn btn-primary  mt-3" (click)="reservar(1)">
+                            <strong>Reservar</strong>
+                        </button>
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </div>
+
+    <!-- Salas ocupadas -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="text-center">
+                    <p class="h3 titulo">Salas Ocupadas</p>
+                    <hr class="separator" />
+                </div>
+            </div>
+            <div class="contenedorO col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-3" *ngFor="let sala of salasOcupadas">
+                <figure>
+                    <img src={{sala.imagen}} alt="">
+                    <div class="capa">
+                        <h1 class="titulo-salas">
+                            {{sala.nombre}}
+                        </h1>
+                        <button type="button" class="btn btn-primary  mt-3" (click)="reservar(1)">
+                            <strong>Reservar</strong>
+                        </button>
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Fin Salas -->
+</div>

@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark posicion">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand" href="#">
+        <img src="../../assets/logo2.png" width="40" height="30" alt="">
+    </a>
+
+    <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto" *ngIf="(user$ | async)?.rol != 'admin'">
+
+
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="['home']">Salas</a>
+            </li>
+
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="['reservar']">Reservar</a>
+            </li>
+
+        </ul>
+
+        <ul class="navbar-nav mr-auto" *ngIf="(user$ | async)?.rol === 'admin'">
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link">Salas</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link">Usuarios</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>

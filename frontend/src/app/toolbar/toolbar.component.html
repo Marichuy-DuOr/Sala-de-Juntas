@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <div class="topbar">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul *ngIf="user$ | async as user; else login">
+                    <li class="nav-item" style="cursor: pointer">
+                        <a aria-label="Perfil" [routerLink]="['perfil-usuario']" class="ico" data-toggle="tooltip" data-placement="bottom" title="Perfil">
+                            <img src="../../assets/user.png" height="30px" width="30px" style="border-radius: 50%"> {{ user.nombre }}
+                        </a>
+                    </li>
+                    <li class="nav-item" style="cursor: pointer">
+                        <a (click)="onLogout()" class="ico">
+                          SALIR
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="toolbar" role="banner">
+        <div class="spacer"></div>
+        <p class="h3 title">
+            <i class="primary-icon" style="margin-right: 1rem;"></i> Sala de Juntas
+        </p>
+        <div class="spacer"></div>
+
+    </div>
+</div>
+
+<ng-template #login>
+    <ul>
+        <li>
+            <a [routerLink]="['login']" class="ico" data-toggle="tooltip" data-placement="bottom" title="Iniciar Sesión">
+                <i class="fa fa-lg fa-sign-in-alt"></i>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['register']" title="Sign Up" class="ico" data-toggle="tooltip" data-placement="bottom" title="Registrarme">
+                <i class="fa fa-lg fa-edit"></i>
+            </a>
+        </li>
+    </ul>
+</ng-template>

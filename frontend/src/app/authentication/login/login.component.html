@@ -1,0 +1,30 @@
+<div class="container filtrar">
+    <div class="row">
+        <div class="col-md-3 col-lg-3"></div>
+        <div class="card form__top2 col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="card-body">
+                <h2 class="text-center top">Iniciar Sesión </h2>
+                <ngb-alert id="uno" class="alert alert-warning" (close)="cerrar('uno')">Algunos de los campos no han sido llenados o estan incorrectos revisalos otra vez</ngb-alert>
+                <ngb-alert id="dos" class="alert alert-danger" (close)="cerrar('dos')">Correo o contraseña incorrectos</ngb-alert>
+                <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="mt-4 accesibilidad">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Dirección de correo</label>
+                        <input type="email" class="form-control" formControlName="correo" aria-describedby="emailHelp" placeholder="juan@gmail.com" required>
+                        <small id="emailHelp" class="form-text text-muted">No compartiremos tu correo con nadie.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Contraseña</label>
+                        <input type="password" class="form-control" formControlName="contrasena" placeholder="Contraseña" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block">Ingresar</button>
+                    </div>
+                </form>
+
+                <p class="text-center accesibilidad">Crear una cuenta
+                    <a [routerLink]="['/register']" onclick="topFunction()" routerLinkActive="router-link-active">Registarse</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
