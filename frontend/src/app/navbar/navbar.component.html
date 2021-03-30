@@ -10,24 +10,18 @@
 
     <div class="collapse navbar-collapse menu" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto" *ngIf="(user$ | async)?.rol != 'admin'">
-
-
             <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" [routerLink]="['home']">Salas</a>
-            </li>
-
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="['reservar']">Reservar</a>
             </li>
 
         </ul>
 
         <ul class="navbar-nav mr-auto" *ngIf="(user$ | async)?.rol === 'admin'">
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link">Salas</a>
+                <a class="nav-link" [routerLink]="['salas']">Salas</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link">Usuarios</a>
+                <a class="nav-link" [routerLink]="['home']">Reservar</a>
             </li>
         </ul>
 

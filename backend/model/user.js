@@ -30,6 +30,36 @@ module.exports = {
         })
     },
 
+    createSala: (connection, body, callback) => {
+        connection.query('insert into salas SET ?', body, (err, results) => {
+            if (err) {
+                callback({ array: null, id: null, success: false, err: JSON.stringify(err) });
+                return;
+            }
+            callback({ array: null, id: null, success: true });
+        });
+    },
+
+    deleteSala: (connection, body, callback) => {
+        connection.query(`delete from salas where id = '${body.id}'`, (err, results) => {
+            if (err) {
+                callback({ array: null, id: null, success: false, err: JSON.stringify(err) });
+                return;
+            }
+            callback({ array: null, id: null, success: true });
+        })
+    },
+
+    updateSalas: (connection, body, callback) => {
+        connection.query('update salas set nombre = ?, ocupada = ?, imagen = ? WHERE id = ? ', [body.nombre, body.ocupada, body.imagen, body.id], (err, results) => {
+            if (err) {
+                callback({ array: null, id: null, success: false, err: JSON.stringify(err) });
+                return;
+            }
+            callback({ array: null, id: null, success: true });
+        });
+    },
+
     getSalas: (connection, callback) => {
         connection.query('select * from salas', (err, results) => {
             if (err) {

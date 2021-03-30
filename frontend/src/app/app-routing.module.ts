@@ -6,11 +6,13 @@ import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
 import { SalaComponent } from './sala/sala.component';
 import { ReservarComponent } from './reservar/reservar.component';
+import { SalasComponent } from './admin/salas/salas.component';
 
 import { CanGuard } from './authentication/guards/can-guard';
 import { CanAdminGuard } from './authentication/guards/can-admin-guard';
 
 const routes: Routes = [
+  {path: 'salas', component: SalasComponent, canActivate: [CanAdminGuard]},
   {path: 'home', component: HomeComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'login', component: LoginComponent},
