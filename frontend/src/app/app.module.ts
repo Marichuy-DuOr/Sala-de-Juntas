@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {DatePipe} from "@angular/common";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,9 @@ import { ForgotPasswordComponent } from './authentication/forgot-password/forgot
 import { CanGuard } from './authentication/guards/can-guard';
 import { CanAdminGuard } from './authentication/guards/can-admin-guard';
 import { HttpClientModule } from '@angular/common/http';
+import { SalaComponent } from './sala/sala.component';
+import { ReservarComponent } from './reservar/reservar.component';
+import { SalasComponent } from './admin/salas/salas.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,10 @@ import { HttpClientModule } from '@angular/common/http';
     ToolbarComponent,
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    SalaComponent,
+    ReservarComponent,
+    SalasComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +47,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     CanGuard,
-    CanAdminGuard
+    CanAdminGuard,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

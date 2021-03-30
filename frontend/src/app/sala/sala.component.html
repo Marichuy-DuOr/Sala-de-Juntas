@@ -1,0 +1,101 @@
+<div class="container filtrar">
+    <div class="row" *ngIf="this.sala.ocupada == 0; else ocupada">
+        
+        <div class="card form__top2 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ngb-alert id="uno" type="danger" (close)="cerrar('uno')">Los campos son incorrectos revisalos de nuevo</ngb-alert>
+            <ngb-alert id="dos" type="danger" (close)="cerrar('dos')">Algunos de los campos no han sido llenados o estan incorrectos revisalos otra vez</ngb-alert>
+            <h3 class="text-center top">{{this.sala.nombre}}</h3>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card-body">
+                        <div class="card" style="width: 30rem;">
+                            <img class="card-img-top" src={{this.sala.imagen}} alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title text-center"> <strong>{{this.disponibilidad}}</strong></h5>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                    <p class="h2 text-center mt-5">Reservar ahora</p>
+                    <form (ngSubmit)="newReservacion(newReservacionForm.value)" [formGroup]="newReservacionForm">
+                        
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Hora final: </label>
+                            <select class="form-control" formControlName="hora">
+                                <option>02</option>
+                                <option>08</option>
+                                <option>09</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                                <option>13</option>
+                                <option>14</option>
+                                <option>15</option>
+                                <option>16</option>
+                                <option>17</option>
+                                <option>18</option>
+                                <option>19</option>
+                                <option>20</option>
+                                <option>21</option>
+                                <option>22</option>
+                                <option>23</option>
+                              </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Minuto final: </label>
+                            <input type="number" class="form-control" formControlName="min">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Evento: </label>
+                            <input type="text" class="form-control" formControlName="evento">
+                        </div>
+
+                        <button type="submit" class="btn btn-outline-danger btn-lg btn-block">Reservar</button>
+                    </form>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+<ng-template #ocupada>
+    <div class="container filtrar">
+        <div class="row">
+           
+            <div class="card form__top3 col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h3 class="text-center top">{{this.sala.nombre}}</h3>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="card-body">
+                            <div class="card" style="width: 30rem;">
+                                <img class="card-img-top" src={{this.sala.imagen}} alt="Card image cap">
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                        <p class="h1 text-center mt-5">{{this.disponibilidad}}</p>
+                        <form class="mt-4 text-center">
+                            
+                            <div class="form-group">
+                                <p class="h4">Hora inicial: {{this.reservaciones.inicio_reunion | date: 'shortTime'}}</p>
+                            </div>
+                            <div class="form-group">
+                                <p class="h4">Hora final: {{this.reservaciones.fin_reunion | date: 'shortTime'}}</p>
+                            </div>
+                            <div class="form-group">
+                                <p class="h4">Evento: {{this.reservaciones.evento}}</p>
+                            </div>
+    
+                            <button type="submit" class="btn btn-outline-danger btn-lg btn-block" (click)="delete()">Terminar reunion</button>
+                        </form>
+                    </div>
+                </div>
+                
+    
+            </div>
+        </div>
+    </div>
+</ng-template>
