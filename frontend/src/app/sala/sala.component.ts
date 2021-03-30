@@ -80,20 +80,19 @@ export class SalaComponent implements OnInit {
       month = "0" + month.toString();
     }
     
-    
+    this.band = 0;
     this.ff = year+"-"+month+"-"+day+" "+form.hora+":"+form.min+":00";
     this.crearFecha();
     if(form.min < 60){
-      if((form.hora-this.hour) < 2){
+      if((form.hora-this.hour) === 2 && form.min <= this.minute){
         this.band = 1;
-      }else if((form.hora-this.hour) <= 2 && form.min <= this.minute){
+      }else if((form.hora-this.hour) < 2){
         this.band = 1;
       }
     }
     
-    if (this.newReservacionForm.valid && this.band == 1) {
+    if (this.newReservacionForm.valid && this.band === 1) {
       if(this.ff > this.fecha){
-  
         let data = {
           idSala: this.sala.id,
           inicio_reunion: this.fecha,
@@ -132,8 +131,8 @@ export class SalaComponent implements OnInit {
         setTimeout(() => document.getElementById('uno').style.display = 'none', 3000);
        }
     }else{
-          document.getElementById('dos').style.display = 'block';
-          setTimeout(() => document.getElementById('dos').style.display = 'none', 3000);
+          document.getElementById('uno').style.display = 'block';
+          setTimeout(() => document.getElementById('uno').style.display = 'none', 3000);
     }
   }
   

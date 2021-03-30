@@ -17,6 +17,12 @@ router.post('/sala', (req, res) => {
     }));
 });
 
+router.get('/salasDisponibles', [], (req, res) => {
+    user.getSalasDisponibles(connection, (data => {
+        res.json(data);
+    }))
+});
+
 router.get('/sala/:id', [
     param('id').not().isEmpty().isNumeric(),
 ], (req, res) => {
@@ -41,6 +47,21 @@ router.delete('/sala/:id', [
         return
     }
     user.deleteSala(connection, params, (data => {
+        res.json(data);
+    }))
+});
+
+router.delete('/reservacion/:id', [
+    param('id').not().isEmpty().isNumeric()
+], (req, res) => {
+    const errors = validationResult(req);
+    let params = req.params;
+    console.log(params);
+    if (!errors.isEmpty()) {
+        res.json({ success: false, err: JSON.stringify(errors) })
+        return
+    }
+    user.deleteReservacion(connection, params, (data => {
         res.json(data);
     }))
 });

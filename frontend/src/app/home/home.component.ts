@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   hour:any;
   minute:any;
   public fecha;
+  public ho;
   
   constructor(private router: Router, private mysqlService: MysqlService, private datePipe: DatePipe) { }
 
@@ -43,10 +44,18 @@ export class HomeComponent implements OnInit {
             .subscribe((res: any) => {
               console.log(res.id[0]);
                 this.crearFecha();
-                let hora = res.id[0].fin_reunion;
-                let myMoment = moment(hora).format('YYYY-MM-DD hh:mm:ss');
-                console.log(myMoment);
-                if(myMoment < this.fecha){
+                let h = res.id[0].fin_reunion;
+                
+                let myMoment = moment(h).format('YYYY-MM-DD hh:mm:ss');
+                let myHora =  moment(myMoment).format('hh');
+                let myMinute = moment(myMoment).format('mm');
+
+                let horaBD = (Number(myHora)+12) +":" +Number(myMinute);
+
+                console.log(this.hour+":"+this.minute);
+                console.log(horaBD);
+                
+                if(horaBD <= (this.hour+":"+this.minute)){
                   let dato = {
                     id: element.id,
                     nombre: element.nombre,
@@ -70,7 +79,7 @@ export class HomeComponent implements OnInit {
                         imagen: element.imagen 
                       };
                       this.salasDisponibles.push(data);
-                }else{
+                }else if(horaBD > (this.hour+":"+this.minute)){
                   const data: sala = {
                     id: element.id,
                     nombre: element.nombre,

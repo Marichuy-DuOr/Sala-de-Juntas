@@ -36,7 +36,7 @@ export class SalasComponent implements OnInit {
   }
 
   public actualizar() {
-    this.mysqlService.consulta(`${environment.API_URL}/salas`)
+    this.mysqlService.consulta(`${environment.API_URL}/salasDisponibles`)
       .subscribe((res: any) => {
         console.log(res);
         this.salas = res.array;

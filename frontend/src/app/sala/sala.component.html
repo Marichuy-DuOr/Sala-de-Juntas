@@ -2,8 +2,7 @@
     <div class="row" *ngIf="this.sala.ocupada == 0; else ocupada">
         
         <div class="card form__top2 col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <ngb-alert id="uno" type="danger" (close)="cerrar('uno')">Los campos son incorrectos revisalos de nuevo</ngb-alert>
-            <ngb-alert id="dos" type="danger" (close)="cerrar('dos')">Algunos de los campos no han sido llenados o estan incorrectos revisalos otra vez</ngb-alert>
+            <ngb-alert id="uno" type="danger" (close)="cerrar('uno')">Debes asegurarte que los campos sean correctos</ngb-alert>
             <h3 class="text-center top">{{this.sala.nombre}}</h3>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">

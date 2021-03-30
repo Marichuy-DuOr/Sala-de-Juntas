@@ -70,6 +70,16 @@ module.exports = {
         })
     },
 
+    getSalasDisponibles: (connection, callback) => {
+        connection.query('select * from salas where ocupada = 0', (err, results) => {
+            if (err) {
+                callback({ array: null, id: null, success: false, err: JSON.stringify(err) });
+                return;
+            }
+            callback({ array: results, id: null, success: true });
+        })
+    },
+
     getIdSala: (connection, id, callback) => {
         connection.query('select * from salas where id = ' + id, (err, results) => {
             if (err) {
