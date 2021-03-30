@@ -40,6 +40,53 @@ module.exports = {
         })
     },
 
-    
+    getIdSala: (connection, id, callback) => {
+        connection.query('select * from salas where id = ' + id, (err, results) => {
+            if (err) {
+                callback({ array: null, id: null, success: false, err: JSON.stringify(err) });
+                return;
+            }
+            callback({ array: null, id: results || null, success: true });
+        })
+    },
 
+    getReservacionIdSala: (connection, id, callback) => {
+        connection.query('select * from reservacion where idSala = ' + id, (err, results) => {
+            if (err) {
+                callback({ array: null, id: null, success: false, err: JSON.stringify(err) });
+                return;
+            }
+            callback({ array: null, id: results || null, success: true });
+        })
+    },
+    
+    createReservacion: (connection, body, callback) => {
+        connection.query('insert into reservacion SET  ?', body, (err, results) => {
+            if (err) {
+                callback({ array: null, id: null, success: false, err: JSON.stringify(err) });
+                return;
+            }
+            callback({ array: results, id: null, success: true });
+        });
+    },
+
+    updateSala: (connection, body, callback) => {
+        connection.query('update salas set nombre = ?, ocupada = ?, imagen = ? WHERE id = ? ', [body.nombre, body.ocupada, body.imagen, body.id], (err, results) => {
+            if (err) {
+                callback({ array: null, id: null, success: false, err: JSON.stringify(err) });
+                return;
+            }
+            callback({ array: null, id: null, success: true });
+        });
+    },
+
+    deleteReservacion: (connection, body, callback) => {
+        connection.query(`delete from reservacion where id = '${body.id}'`, (err, results) => {
+            if (err) {
+                callback({ array: null, id: null, success: false, err: JSON.stringify(err) });
+                return;
+            }
+            callback({ array: null, id: null, success: true });
+        })
+    },
 }
