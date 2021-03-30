@@ -1,3 +1,4 @@
+//Manejador de rutas para poder mostrar un JSON y usar nuestro modelo de usuario
 const express = require('express');
 const connection = require("../conexion");
 const user = require('../model/user');

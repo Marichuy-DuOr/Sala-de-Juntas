@@ -14,13 +14,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterComponent } from './authentication/register/register.component';
-import { ForgotPasswordComponent } from './authentication/forgot-password/forgot-password.component';
 
 import { CanGuard } from './authentication/guards/can-guard';
 import { CanAdminGuard } from './authentication/guards/can-admin-guard';
 import { HttpClientModule } from '@angular/common/http';
 import { SalaComponent } from './sala/sala.component';
-import { ReservarComponent } from './reservar/reservar.component';
 import { SalasComponent } from './admin/salas/salas.component';
 
 @NgModule({
@@ -32,9 +30,7 @@ import { SalasComponent } from './admin/salas/salas.component';
     ToolbarComponent,
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent,
     SalaComponent,
-    ReservarComponent,
     SalasComponent
   ],
   imports: [

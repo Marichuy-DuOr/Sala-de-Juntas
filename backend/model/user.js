@@ -1,3 +1,4 @@
+//Funciones para las peticiones a la base de datos
 module.exports = {
 
     getAll: (connection, callback) => {

@@ -1,3 +1,4 @@
+//bcrypt nos encripta el password
 const express = require('express');
 const connection = require("../conexion");
 const user = require('../model/user');
@@ -8,7 +9,8 @@ const jwt = require('jwt-simple');
 const moment = require('moment');
 
 const { body, param, validationResult } = require('express-validator');
-
+//función para generar un Token el cual nos permitirá comprobar cuando el 
+//usuario esté logueado con ayuda del navegador.
 const crearToken = (user) => {
     let payload = {
         idUsuario: user.id,

@@ -13,17 +13,17 @@ import * as moment from "moment";
   providers: [DatePipe]
 })
 export class HomeComponent implements OnInit {
-
+//Se construyen dos arreglos uno para las salas disponibles y otro para las ocupadas 
   public salasOcupadas = [];
   public salasDisponibles = [];
   public reservacion = [];
-  hour:any;
+  hour:any; //Variables para obtener la hora del sistema
   minute:any;
   public fecha;
   public ho;
   
   constructor(private router: Router, private mysqlService: MysqlService, private datePipe: DatePipe) { }
-
+//Redirecciona para hacer la reserva o para terminar la reserva 
   verInformacion(item: any){
     this.router.navigate([ '/sala', item ]);
   }
@@ -31,27 +31,29 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.actualizar();
   }
-
+//Libera las salas que se van desocupando 
   public actualizar() {
     this.mysqlService.consulta(`${environment.API_URL}/salas`)
       .subscribe((res: any) => {
         console.log(res);
 
         res.array.forEach(element => {
+          //Si la sala esta ocupada hace la liberacion
           if(element.ocupada === 1 ){
-
+          //Obtiene todas las reservaciones
             this.mysqlService.consultaId(`${environment.API_URL}/verReservaciones/${element.id}` )
             .subscribe((res: any) => {
               console.log(res.id[0]);
                 this.crearFecha();
                 let h = res.id[0].fin_reunion;
-                
+                //La hora final la obtiene para saber si ya termino el tiempo
                 let myMoment = moment(h).format('YYYY-MM-DD hh:mm:ss');
                 let myHora =  moment(myMoment).format('hh');
                 let myMinute = moment(myMoment).format('mm');
 
                 let horaBD = (Number(myHora)+12) +":" +Number(myMinute);
-                
+                //Compara si la hora de la reservacion es menor con la actual
+                //Si es menor o igual quiere decir que ya se termino el tiempo
                 if(horaBD <= (this.hour+":"+this.minute)){
                   let dato = {
                     id: element.id,
@@ -59,6 +61,7 @@ export class HomeComponent implements OnInit {
                     ocupada: 0,
                     imagen: element.imagen
                   };
+                  //Libera la sala y elimina la reservacion 
                   this.mysqlService.cambio(`${environment.API_URL}/updSala`, dato)
                   .subscribe((res: any) => {
                     console.log(res);
@@ -77,6 +80,7 @@ export class HomeComponent implements OnInit {
                       };
                       this.salasDisponibles.push(data);
                 }else if(horaBD > (this.hour+":"+this.minute)){
+                  // Si es mayor la hora de la reservacion, aun no se le termina el tiempo para ser liberada
                   const data: sala = {
                     id: element.id,
                     nombre: element.nombre,
@@ -86,7 +90,7 @@ export class HomeComponent implements OnInit {
                   this.salasOcupadas.push(data);
                 }
             });
-          } else{
+          } else{ //Si no esta ocupada lo almacena en salas disponibles
             const data: sala = {
               id: element.id,
               nombre: element.nombre,
@@ -98,14 +102,9 @@ export class HomeComponent implements OnInit {
         });
     });
 
-    this.salasOcupadas.forEach(data => {
-      console.log(data);
-      
-    });
-
   }
 
-
+//Funcion para obtener la fecha del sistema
   public crearFecha(){
     let currentDate = new Date();
   

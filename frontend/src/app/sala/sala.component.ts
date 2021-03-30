@@ -1,3 +1,4 @@
+//Muestra la informacion de sala seleccionada 
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MysqlService } from '../services/mysql.service';
@@ -45,7 +46,7 @@ export class SalaComponent implements OnInit {
                   evento:''
                 });
   }
-
+//Se obtiene la sala para saber si esta ocupada o desocupada
   ngOnInit(): void {
     this.mysqlService.consultaId(`${environment.API_URL}/sala/${this.idDoc}` )
     .subscribe((res: any) => {
@@ -57,7 +58,7 @@ export class SalaComponent implements OnInit {
         this.disponibilidad = "Disponible";
       }
     });
-
+    //Se obtiene la reservacion de la sala
     this.mysqlService.consultaId(`${environment.API_URL}/verReservaciones/${this.idDoc}` )
     .subscribe((res: any) => {
       console.log(res);
@@ -65,7 +66,7 @@ export class SalaComponent implements OnInit {
     });
     
   }
-
+//Si la sala esta desocupada se registra la hora de termino y el evento 
   public newReservacion(form) {
     let currentDate = new Date();
   
@@ -79,7 +80,7 @@ export class SalaComponent implements OnInit {
     if(month<10){
       month = "0" + month.toString();
     }
-    
+    //Se verifica que no sean mas de dos horas
     this.band = 0;
     this.ff = year+"-"+month+"-"+day+" "+form.hora+":"+form.min+":00";
     this.crearFecha();
@@ -90,7 +91,7 @@ export class SalaComponent implements OnInit {
         this.band = 1;
       }
     }
-    
+    //Se verifica que los datos sean correctos
     if (this.newReservacionForm.valid && this.band === 1) {
       if(this.ff > this.fecha){
         let data = {
@@ -99,7 +100,7 @@ export class SalaComponent implements OnInit {
           fin_reunion: this.ff,
           evento: form.evento
         };
-  
+        //Da de alta la reservacion
         this.mysqlService.alta(`${environment.API_URL}/reservacion`, data)
         .then((laData) => {
           console.log(laData);
@@ -108,7 +109,7 @@ export class SalaComponent implements OnInit {
                   min: '',
                   evento:''
           });
-
+          //Pone la sala a ocupada
           let data = {
             id: this.sala.id,
             nombre: this.sala.nombre,
@@ -125,7 +126,7 @@ export class SalaComponent implements OnInit {
         .catch((err) => {
           console.log(err);
         });
-  
+  //Si los datos no son correctos muestra mensaje
       } else{
         document.getElementById('uno').style.display = 'block';
         setTimeout(() => document.getElementById('uno').style.display = 'none', 3000);
@@ -135,7 +136,7 @@ export class SalaComponent implements OnInit {
           setTimeout(() => document.getElementById('uno').style.display = 'none', 3000);
     }
   }
-  
+  //Al presionar el boton de terminar reservacion, elimina la reservacion y libera la sala
   public delete(){
     let data = {
       id: this.sala.id,
@@ -154,7 +155,7 @@ export class SalaComponent implements OnInit {
                 });
                 this.router.navigate(['home']);        
   }
-
+//Funcion para la fecha del sistema
   public crearFecha(){
     let currentDate = new Date();
   

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
+//Inicia sesion si los datos proporcionados son correctos
   onLogin() {
     if (this.loginForm.valid) {
       this.subscription.add(

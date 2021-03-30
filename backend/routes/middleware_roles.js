@@ -1,3 +1,4 @@
+//Verifica los roles para saber si tiene permisos para acceder a las peticiones
 const jwt = require('jwt-simple');
 const moment = require('moment');
 

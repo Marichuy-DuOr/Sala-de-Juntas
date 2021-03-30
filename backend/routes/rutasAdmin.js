@@ -1,3 +1,4 @@
+//Rutas a las que solo tiene permiso el admin
 const express = require('express');
 const connection = require("../conexion");
 const user = require('../model/user');

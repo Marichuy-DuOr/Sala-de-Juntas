@@ -1,3 +1,4 @@
+//Se crea un nuevo usuario con los datos proporcionados
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';

@@ -1,3 +1,5 @@
+//Se muestran las salas para poder editarlas o eliminarlas
+//Se agregan nuevas salas
 import { Component, OnInit } from '@angular/core';
 import { MysqlService } from './../../services/mysql.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -34,7 +36,7 @@ export class SalasComponent implements OnInit {
     document.getElementById('tres').style.display = 'none';
     this.actualizar();
   }
-
+  //Obtiene las salas disponibles
   public actualizar() {
     this.mysqlService.consulta(`${environment.API_URL}/salasDisponibles`)
       .subscribe((res: any) => {
@@ -42,7 +44,7 @@ export class SalasComponent implements OnInit {
         this.salas = res.array;
       });
   }
-
+// Da de alta una nueva sala
   public newSala(form, tuplaId = this.tuplaId) {
     if (this.newSalaForm.valid) {
       if (this.currentStatus == 1) {
@@ -72,7 +74,7 @@ export class SalasComponent implements OnInit {
           nombre: form.nombre,
           imagen: form.imagen
         };
-
+        //Si se requiere editar la sala lo hace aqui
         this.mysqlService.cambio(`${environment.API_URL}/sala`, data)
           .subscribe((res: any) => {
             console.log(res);
@@ -92,7 +94,7 @@ export class SalasComponent implements OnInit {
       setTimeout(() => document.getElementById('uno').style.display = 'none', 5000);
     }
   }
-
+//Obtiene el id de la sala seleccionada 
   public editSala(tuplaId) {
     this.mysqlService.consultaId(`${environment.API_URL}/sala/${tuplaId}` )
       .subscribe((res: any) => {
@@ -106,7 +108,7 @@ export class SalasComponent implements OnInit {
         });
       });
   }
-
+//Elimina la sala seleccionada por medio del id
   public deleteSala(tuplaId) {
     this.mysqlService.delete(`${environment.API_URL}/sala/${tuplaId}`)
       .subscribe((res: any) => {
