@@ -51,9 +51,6 @@ export class HomeComponent implements OnInit {
                 let myMinute = moment(myMoment).format('mm');
 
                 let horaBD = (Number(myHora)+12) +":" +Number(myMinute);
-
-                console.log(this.hour+":"+this.minute);
-                console.log(horaBD);
                 
                 if(horaBD <= (this.hour+":"+this.minute)){
                   let dato = {
